@@ -1,7 +1,7 @@
 <?php
 $title="Authorization";
-$title="Cat breeds";
 
+date_default_timezone_set("Europe/Moscow");
 $today= date("d.m.y");
 $time = date("G:i:s");
 ?>

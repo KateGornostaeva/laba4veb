@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>Лабораторная работа 2 авторизация</title>
+    <title><?= $title?> </title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">  <!--подключение стилей css -->
     <link rel="preconnect" href="https://fonts.googleapis.com"> <!--подключение шрифтов -->
@@ -14,6 +14,8 @@
         <p><div id = "catalog_cat"><a href = "site_main.php">КАТАЛОГ ПОРОД КОШЕК</a> </div>
         <div id = "main_search">Главная
         Поиск
-        <a href = "site_login.php">Войти</a></div></p>
+        <a href = "<?php $name='Войти'; $link ='site_login.php'; $current_page=true; echo $link;?>">
+            <?php if( $current_page ) echo $name;?> <!--второе включение PHP‐кода -->
+        </a></div></p>
     </header>
 </body>

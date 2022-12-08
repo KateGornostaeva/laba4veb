@@ -2,6 +2,7 @@
 $title="Cat breeds"; //title, который название страницы
 date_default_timezone_set("Europe/Moscow");
 $today = date('d.m.Y в H-i:s'); //дата, время
+$array = array('Погладить','Покормить','Поласкать','Обнять','Поиграть','Дать вкусняшку', 'Не мешать спать'); 
 ?>
 <head>
     <title>Лабораторная работа 1</title>
@@ -10,8 +11,6 @@ $today = date('d.m.Y в H-i:s'); //дата, время
     <link rel="preconnect" href="https://fonts.googleapis.com"> <!--подключение шрифтов -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap" rel="stylesheet"> 
-    <script src="javascript.js"></script>
-
 </head>
 
 <body>
@@ -23,35 +22,65 @@ $today = date('d.m.Y в H-i:s'); //дата, время
     </header>
 
     <div class = "main">
-        <section class="fun">
-            <h1>Функция возведения в степень</h1>
-                <p id="pow">3^3 = </p>
-                    <button onclick="pow(3, 3)">Посчитать</button>
-        </section>
+        <secion class="title">
+                    <h1>Породы кошек</h1>
+                </section>
+                <section class="history">
+                    <div class="text">
+                        <h2>Бенгальская кошка</h2>
+                        <p> 
+                            Бенгальская порода кошек возникла в результате целенаправленного скрещивания дикого азиатского кота с домашней кошкой. 
+                            Основательница породы Джейн Милл - американский биолог, хотела, чтобы люди смогли содержать дома ласковое и ручное животное, 
+                            напоминающее дикого жителя джунглей, и перестали истреблять лесного хищника в его естественной среде обитания. 
+                            Бенгальские кошки впервые приняли участие в выставке TICA в 1991 г, а на сегодняшний день порода признана большинством 
+                            фелинологических организаций.
+                        </p>
+                    </div>
+                    
+                    <img src="cat3.jpg" alt="cat" title="бенгальский котенок" width="300"> 
 
-        <section class="fun">
-            <h1>Функция нахождения Наибольший общий делитель</h1>
-                <p id="nod">НОД (6, 27) = </p>
-                    <button onclick="nod(27, 6)">Посчитать</button>  
-        </section> 
-        
-        <section class="fun">
-            <h1>Функция нахождения наименьшей цифры числа</h1>  
-                <p id="minDigit">Минимальная цифра в 23 - это </p>
-                    <button onclick="minDigit(23)">Посчитать</button> 
-        </section> 
+                </section> 
+                
+                <section class="new">
+                    <h2>Фотографии</h2>
+                    <div class="text_img">
+                            <?php
+                                include "database.php";
+                                $sql = "SELECT * FROM image";
+                                $result = mysqli_query($db, $sql);//обращение к бд
+                                
+                                if (!$result) die('Error result');
+                                
+                                while ($row_img = mysqli_fetch_assoc($result)) { //(вывод данных из бд) получает массив из запроса который отправили (из result)
+                                    ?>
+                                        <img title="<?php echo $row_img['name'];?>" src="<?php echo $row_img['src']?>" height="300" />
+                                        
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                </section>
 
-        <section class="fun">
-            <h1>Плюрализация</h1>
-                <p id="pluralizeRecords">Сколько записей было найдено? </p>
-                    <button onclick="pluralize(1)">Посчитать</button> 
-        </section>  
-        
-        <section class="fun">
-            <h1>Числа Фибоначчи</h1>
-                <p id="fibb">6-ое число Фибоначчи - это </p>
-                    <button onclick="fibb(52)">Посчитать</button>
-        </section>  
+                <section class="foto_cats">
+                    <div class="text">
+                        <h2>Описание породы</h2>
+                        <p>
+                            Мощное и вытянутое тело с хорошо развитой мускулатурой, костяк крепкий, лапы средней длины. Голова пропорциональная по 
+                            отношению к туловищу с хорошо развитыми челюстями. Уши довольно короткие с широким основанием, расположены максимально широко. 
+                            Глаза округлые, яркие и выразительные.
+                        </p>
+                    </div>
+                    <? echo '<img title="кот сидит" src="cat'.(date('s') % 2+1).'.jpg" alt="Меняющаяся фотография">'; ?>
+
+                </section>  
+
+                <section class="formule_cats_love">
+                <h2>Рецепт достижния любви котиков</h2>
+                <? foreach ($array as $n => $row) {
+                    echo ($n + 1) . '.' . $row . "<br>\r\n";
+                } ?>
+              </section> 
+        </secion>
     </div>
     
     <footer>
